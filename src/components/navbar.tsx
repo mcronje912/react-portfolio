@@ -27,7 +27,7 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-info-100 dark:bg-secondary-50 rounded-md",
+        inputWrapper: "bg-default-100 dark:bg-default-50 rounded-md",
         input: "text-sm",
       }}
       endContent={
@@ -44,13 +44,11 @@ export const Navbar = () => {
     />
   );
 
-
-
   return (
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
-      className="bg-secondary-400/75 dark:bg-secondary-400/75 backdrop-blur-sm backdrop-saturate-150 border-b border-secondary-800/10 shadow-xl z-10"
+      className="bg-background/70 dark:bg-background/70 backdrop-blur-md backdrop-saturate-150 z-10"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
