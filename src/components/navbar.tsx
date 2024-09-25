@@ -1,6 +1,5 @@
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -10,142 +9,93 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { link as linkStyles } from "@nextui-org/theme";
-import clsx from "clsx";
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  SearchIcon,
-} from "@/components/icons";
-import { Logo } from "@/components/icons";
+import { FaGithub, FaLinkedin, FaRocket } from 'react-icons/fa'; // Icon import
+import { ThemeSwitch } from "@/components/theme-switch"; // Import your theme switch
+import { Tooltip } from "@nextui-org/tooltip";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/docs", label: "Docs" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+];
 
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100 dark:bg-default-50 rounded-md",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+  const location = useLocation();
 
   return (
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
-      className="bg-background/70 dark:bg-background/70 backdrop-blur-md backdrop-saturate-150 z-10"
+      className="bg-primary-400/50 dark:bg-secondary-100/50 backdrop-blur-sm backdrop-brightness-90 border-b border-info-500/50 shadow-lg"
     >
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="gap-3 max-w-fit">
-          <Link
-            className="flex justify-start items-center gap-1 text-lg font-semibold text-primary"
-            href="/"
-          >
-            <Logo />
-            <p className="font-bold text-inherit tracking-wide">ACME</p>
-          </Link>
-        </NavbarBrand>
-        <div className="hidden lg:flex gap-6 ml-4">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <Link
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium hover:text-primary transition-colors"
-                )}
-                href={item.href}
-              >
-                {item.label}
-              </Link>
-            </NavbarItem>
-          ))}
-        </div>
+      <NavbarBrand as={Link} to="/">
+        {/* Replace with valid link */}
+        <FaRocket size={30} className="mr-2" />
+        <p className="font-bold text-xl">Marco Cronje</p>
+      </NavbarBrand>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {navItems.map((item) => (
+          <NavbarItem key={item.href}>
+            <Link
+              to={item.href}
+              className={`${
+                location.pathname === item.href
+                  ? "text-primary"
+                  : "text-foreground"
+              } transition-colors hover:text-primary`}
+            >
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-4">
-          <Link
-            isExternal
-            href={siteConfig.links.twitter}
-            title="Twitter"
-            className="hover:text-primary transition-colors"
-          >
-            <TwitterIcon className="text-default-500 hover:scale-110 transition-transform" />
-          </Link>
-          <Link
-            isExternal
-            href={siteConfig.links.discord}
-            title="Discord"
-            className="hover:text-primary transition-colors"
-          >
-            <DiscordIcon className="text-default-500 hover:scale-110 transition-transform" />
-          </Link>
-          <Link
-            isExternal
-            href={siteConfig.links.github}
-            title="GitHub"
-            className="hover:text-primary transition-colors"
-          >
-            <GithubIcon className="text-default-500 hover:scale-110 transition-transform" />
-          </Link>
-          <ThemeSwitch />
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Tooltip content="LinkedIn">
+            {/* Corrected: Used "#" as href placeholder */}
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin size={25} className="text-foreground hover:text-primary" />
+            </a>
+          </Tooltip>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <NavbarItem>
+          <Tooltip content="GitHub">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <FaGithub size={25} className="text-foreground hover:text-primary" />
+            </a>
+          </Tooltip>
+        </NavbarItem>
+        <NavbarItem>
+          <Tooltip content="Switch Theme">
+            {/* Fixed: Removed invalid size prop */}
+            <ThemeSwitch className="text-foreground hover:text-primary" />
+          </Tooltip>
+        </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link
-          isExternal
-          href={siteConfig.links.github}
-          className="hover:text-primary transition-colors"
-        >
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu className="bg-background/70 dark:bg-background/70 backdrop-blur-md backdrop-saturate-150">
-        <div className="p-4">{searchInput}</div>
-        <div className="px-6 py-2 flex flex-col gap-4">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-                className="hover:text-primary transition-colors"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
+      <NavbarMenuToggle className="sm:hidden" />
+      <NavbarMenu>
+        {navItems.map((item) => (
+          <NavbarMenuItem key={item.href}>
+            <Link
+              to={item.href}
+              className={`${
+                location.pathname === item.href
+                  ? "text-primary"
+                  : "text-foreground"
+              } w-full transition-colors hover:text-primary`}
+            >
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
       </NavbarMenu>
     </NextUINavbar>
   );
 };
+
+export default Navbar;
