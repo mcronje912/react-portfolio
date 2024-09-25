@@ -56,7 +56,7 @@ export default function IndexPage() {
             <p>test</p>           
           </Snippet>
         </div>
-        <Snippet>
+        <Snippet hideCopyButton hideSymbol variant="shadow">
         <p>test text</p>   
         </Snippet>
       </section>

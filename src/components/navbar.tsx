@@ -27,7 +27,7 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100 rounded-md",
+        inputWrapper: "bg-default-100 dark:bg-default-50 rounded-md",
         input: "text-sm",
       }}
       endContent={
@@ -48,13 +48,12 @@ export const Navbar = () => {
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
-      className="bg-white shadow-md z-10 backdrop-blur-md"
+      className="bg-background/70 dark:bg-background/70 backdrop-blur-md backdrop-saturate-150 z-10"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
             className="flex justify-start items-center gap-1 text-lg font-semibold text-primary"
-            color="foreground"
             href="/"
           >
             <Logo />
@@ -124,7 +123,7 @@ export const Navbar = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu className="bg-white shadow-lg">
+      <NavbarMenu className="bg-background/70 dark:bg-background/70 backdrop-blur-md backdrop-saturate-150">
         <div className="p-4">{searchInput}</div>
         <div className="px-6 py-2 flex flex-col gap-4">
           {siteConfig.navMenuItems.map((item, index) => (
