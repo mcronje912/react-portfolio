@@ -21,7 +21,7 @@ import { ThemeSwitch } from "@/components/theme-switch";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/docs", label: "Projects" },
+  { href: "/projects", label: "Projects" },
   { href: "/About", label: "About" },
   { href: "/blog", label: "Contact" },
 ];
@@ -31,26 +31,14 @@ const Navbar = () => {
 
   return (
     <NextUINavbar
-      className="bg-primary-400/50 dark:bg-secondary-100/50 backdrop-blur-sm backdrop-brightness-90 border-b border-info-500/50 shadow-lg"
+      className="bg-white/80 dark:bg-blue-800/55 backdrop-blur-sm backdrop-contrast-50 border-b border-info-500/50 shadow-xl"
       maxWidth="xl"
       position="sticky"
     >
       {/* Logo and Brand Name */}
       <NavbarBrand as={Link} className="flex items-center space-x-3" to="/">
-        <FaLaptopCode
-          className="shadow-sm"
-          size={25}
-          style={{
-            background: "linear-gradient(135deg, #42a5f5, #42d5f5)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            color: "#42a5f5", // Fallback color for browsers that don't support background-clip
-          }}
-        />
-        <p
-          className="font-silkscreen text-xl bg-gradient-to-br from-secondary-500 to-primary-500 bg-clip-text text-transparent"
-          style={{ fontFamily: "Silkscreen" }}
-        >
+        <FaLaptopCode className="text-delft-blue-500 shadow-sm" size={25} />
+        <p className="text-primary-600" style={{ fontFamily: "Silkscreen" }}>
           Marco Cronje
         </p>
       </NavbarBrand>
@@ -76,7 +64,7 @@ const Navbar = () => {
         <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
-              <button className="text-foreground hover:text-primary">
+              <button className="text-foreground hover:text-primary/5">
                 More
               </button>
             </DropdownTrigger>

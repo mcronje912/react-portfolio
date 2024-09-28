@@ -50,7 +50,6 @@ const IconCarousel = () => {
       keyBoardControl={false}
       removeArrowOnDeviceType={["tablet", "mobile"]}
       responsive={responsive}
-      
     >
       {icons.map((icon, index) => (
         <div key={index} className="flex flex-col items-center">
@@ -71,7 +70,7 @@ export default function IndexPage() {
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="text-center">
           <h1
-            className="font-silkscreen text-5xl bg-gradient-to-br from-secondary-500 to-primary-500 bg-clip-text text-transparent"
+            className="font-silkscreen text-5xl bg-gradient-to-r from-delft-blue to-turquoise bg-clip-text text-transparent dark:from-turquoise dark:to-magnolia"
             style={{ fontFamily: "Silkscreen" }}
           >
             Bringing Innovation to Life
@@ -86,7 +85,7 @@ export default function IndexPage() {
           <div className="flex gap-8 mt-6 justify-center">
             <Link
               className={buttonStyles({ variant: "shadow" })}
-              href="#projects"
+              href="/projects"
             >
               View My Work
             </Link>
