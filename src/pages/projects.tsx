@@ -1,60 +1,88 @@
-import { useState, useEffect } from "react";
-import { Tabs, Tab } from "@nextui-org/tabs";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/dropdown";
-import { Card, CardBody, CardFooter } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
-import { Skeleton } from "@nextui-org/skeleton";
-import { FaReact, FaCube, FaMobileAlt } from "react-icons/fa";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Tabs, Tab, Chip } from "@nextui-org/react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import DefaultLayout from "@/layouts/default";
 
 interface Project {
   id: number;
   title: string;
   description: string;
+  link: string;
   image: string;
+  inProgress: boolean;
 }
 
-interface ProjectGridProps {
-  projects: Project[];
-  isLoading: boolean;
-}
+const categoryNames = {
+  web: "Web Development",
+  design: "3D Design",
+  mobile: "Mobile Apps",
+};
 
-interface ProjectCardProps {
-  project: Project;
-  isLoading: boolean;
-}
-
+const projects: Record<string, Project[]> = {
+  web: [
+    {
+      id: 1,
+      title: "Joint Ventures Electronic Services",
+      description: "Complete revamp of the company website",
+      link: "/projects/web/jves",
+      image: "/placeholder.jpg",
+      inProgress: true,
+    },
+    {
+      id: 2,
+      title: "Portfolio Website",
+      description: "A responsive portfolio website built with React",
+      link: "/projects/web/portfolio",
+      image: "/placeholder.jpg",
+      inProgress: true,
+    },
+  ],
+  design: [
+    {
+      id: 1,
+      title: "Mine Lamp Charging Rack",
+      description: "3D Prototype of a Mine Cap Lamp charging rack",
+      link: "/projects/design/mine-lamp",
+      image: "/public/images/projects/smlamp.jpg",
+      inProgress: false,
+    },
+    {
+      id: 2,
+      title: "Sheet",
+      description: "Innovative mouse design for improved comfort",
+      link: "/projects/design/sheet",
+      image: "/placeholder.jpg",
+      inProgress: true,
+    },
+  ],
+  mobile: [
+    {
+      id: 1,
+      title: "etamax Intelligent Solar Geyser",
+      description: "App for managing home water heater energy usage",
+      link: "/projects/mobile/etamax",
+      image: "/public/images/projects/etamaxth.png",
+      inProgress: false,
+    },
+    {
+      id: 2,
+      title: "Reev Electric Scooter",
+      description: "Accompanying app to the Reev Electric Scooter",
+      link: "/projects/mobile/reev",
+      image: "/public/images/projects/reevth.png",
+      inProgress: false,
+    },
+  ],
+};
 
 export default function ProjectsPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("web");
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const categories = [
-    { key: "web", name: "React Web Apps", icon: FaReact },
-    { key: "3d", name: "3D Product Design", icon: FaCube },
-    { key: "mobile", name: "Mobile Apps", icon: FaMobileAlt },
-  ];
-
-  const projectsByCategory = {
-    web: webProjects,
-    "3d": designProjects,
-    mobile: mobileProjects,
-  };
+  const [selectedCategory, setSelectedCategory] = useState<string>("design");
 
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <div className="flex flex-col items-center justify-center gap-8 py-8 md:py-10 px-4">
         <h1
           className="font-silkscreen text-5xl bg-gradient-to-r from-delft-blue to-turquoise bg-clip-text text-transparent dark:from-turquoise dark:to-magnolia"
           style={{ fontFamily: "Silkscreen" }}
@@ -62,166 +90,95 @@ export default function ProjectsPage() {
           Projects
         </h1>
 
-        {/* Tabs for larger screens */}
-        <div className="hidden md:block w-full max-w-3xl">
-          <Tabs
-            aria-label="Project categories"
-            className="mt-6 flex justify-center"
-            color="primary"
-            selectedKey={selectedCategory}
-            variant="solid"
-            onSelectionChange={(key) => setSelectedCategory(key.toString())}
+        {/* Category Selection */}
+        <Tabs
+          aria-label="Project categories"
+          color="primary"
+          selectedKey={selectedCategory}
+          variant="solid"
+          onSelectionChange={(key) => setSelectedCategory(key as string)}
+        >
+          {Object.keys(projects).map((category) => (
+            <Tab
+              key={category}
+              title={categoryNames[category as keyof typeof categoryNames]}
+            />
+          ))}
+        </Tabs>
+
+        {/* Project Cards */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory}
+            animate={{ opacity: 1, x: 0 }}
+            className="grid grid-cols-1 gap-6 w-full max-w-4xl"
+            exit={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
           >
-            {categories.map((category) => (
-              <Tab
-                key={category.key}
-                title={
-                  <div className="flex items-center space-x-2">
-                    <category.icon />
-                    <span>{category.name}</span>
+            {projects[selectedCategory].map((project) => (
+              <div
+                key={project.id}
+                className="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg p-6 flex items-start justify-between"
+              >
+                <div className="flex-grow">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                    {project.inProgress && (
+                      <Chip color="primary" size="sm" variant="flat">
+                        In Progress
+                      </Chip>
+                    )}
                   </div>
-                }
-              />
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {project.description}
+                  </p>
+                  <Button
+                    as={Link}
+                    color="primary"
+                    isDisabled={project.inProgress}
+                    size="sm"
+                    to={project.link}
+                    variant="bordered"
+                  >
+                    Learn More
+                  </Button>
+                </div>
+                <div className="ml-4 flex-shrink-0">
+                  <img
+                    alt={project.title}
+                    className="w-28 h-28 object-cover rounded-lg shadow-md"
+                    src={project.image}
+                  />
+                </div>
+              </div>
             ))}
-          </Tabs>
-        </div>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Dropdown for smaller screens */}
-        <div className="md:hidden w-full max-w-xs mt-6">
-          <Dropdown>
-            <DropdownTrigger>
-              <Button className="w-full" color="primary" variant="faded">
-                {categories.find((c) => c.key === selectedCategory)?.name ||
-                  "Select Category"}
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Project categories"
+        {/* Quick Navigation Links */}
+        <div className="mt-12 p-6 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg w-full max-w-4xl">
+          <h2 className="text-2xl font-semibold mb-4 text-center">
+            Quick Navigation
+          </h2>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button as={Link} color="primary" to="/about" variant="flat">
+              About Page
+            </Button>
+            <Button
+              as={Link}
               color="primary"
-              selectedKeys={[selectedCategory]}
-              selectionMode="single"
-              onSelectionChange={(keys) => {
-                const newKey = keys.currentKey;
-                setSelectedCategory(typeof newKey === "string" ? newKey : "web");
-              }}
+              to="/projects/mobile/reev"
+              variant="flat"
             >
-              {categories.map((category) => (
-                <DropdownItem key={category.key}>
-                  <div className="flex items-center space-x-2">
-                    <category.icon />
-                    <span>{category.name}</span>
-                  </div>
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
+              Reev Project
+            </Button>
+            <Button as={Link} color="primary" to="/blog" variant="flat">
+              Blog Page
+            </Button>
+          </div>
         </div>
-
-        <ProjectGrid
-          isLoading={isLoading}
-          projects={projectsByCategory[selectedCategory as keyof typeof projectsByCategory]}
-        />
-      </section>
+      </div>
     </DefaultLayout>
   );
 }
-
-function ProjectGrid({ projects, isLoading }: ProjectGridProps) {
-  return (
-    <div className="flex flex-wrap justify-center gap-4 mt-4">
-      {projects.map((project) => (
-        <div
-          key={project.id}
-          className="w-full sm:w-[calc(50%-0.5rem)] max-w-sm"
-        >
-          <ProjectCard isLoading={isLoading} project={project} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ProjectCard({ project, isLoading }: ProjectCardProps) {
-  return (
-    <Card className="h-full backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
-      <CardBody>
-        <Skeleton className="rounded-lg" isLoaded={!isLoading}>
-          <div className="h-40 rounded-lg bg-default-300">
-            {!isLoading && (
-              <Image
-                alt={project.title}
-                className="object-cover rounded-xl w-full h-full"
-                src={project.image}
-              />
-            )}
-          </div>
-        </Skeleton>
-        <Skeleton className="mt-2" isLoaded={!isLoading}>
-          <h4 className="font-bold text-large">{project.title}</h4>
-        </Skeleton>
-        <Skeleton className="mt-2" isLoaded={!isLoading}>
-          <p className="text-small text-default-500">{project.description}</p>
-        </Skeleton>
-      </CardBody>
-      <CardFooter>
-        <Skeleton isLoaded={!isLoading}>
-          <Button color="primary" size="sm">
-            Learn More
-          </Button>
-        </Skeleton>
-      </CardFooter>
-    </Card>
-  );
-}
-
-// Sample project data
-const webProjects: Project[] = [
-  {
-    id: 1,
-    title: "Joint Ventures Electronic Services",
-    description: "Complete revamp of the company website",
-    image: "/path/to/image1.jpg",
-  },
-  {
-    id: 2,
-    title: "Portfolio Website",
-    description: "A responsive portfolio website built with Next.js",
-    image: "/path/to/image2.jpg",
-  },
-  // Add more web projects...
-];
-
-const designProjects: Project[] = [
-  {
-    id: 1,
-    title: "Mine Lamp Charging Rack",
-    description:
-      "3D Prototype of a Mine Cap Lamp charging rack.",
-    image: "/path/to/image3.jpg",
-  },
-  {
-    id: 2,
-    title: "Sheet Metal Design",
-    description:
-      "Innovative mouse design for improved comfort and productivity",
-    image: "/path/to/image4.jpg",
-  },
-  // Add more design projects...
-];
-
-const mobileProjects: Project[] = [
-  {
-    id: 1,
-    title: "etamax Intelligent Solar Geyser",
-    description:
-      "Cross-platform mobile app for managing home water heater energy usage.",
-    image: "/path/to/image5.jpg",
-  },
-  {
-    id: 2,
-    title: "Reev Electric Scooter",
-    description: "Accompanying app to the Reev Electric Scooter, under development.",
-    image: "/path/to/image6.jpg",
-  },
-  // Add more mobile projects...
-];

@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
+import ReevProjectPage from "./pages/projects/mobile/reev";
+
 import IndexPage from "@/pages/index";
 import ProjectsPage from "@/pages/projects";
 import PricingPage from "@/pages/pricing";
@@ -14,6 +16,7 @@ function App() {
       <Route element={<PricingPage />} path="/pricing" />
       <Route element={<BlogPage />} path="/blog" />
       <Route element={<AboutPage />} path="/about" />
+      <Route element={<ReevProjectPage />} path="/projects/mobile/reev" />
     </Routes>
   );
 }

@@ -7,6 +7,7 @@ export const useTheme = () => {
   useEffect(() => {
     // Check if there's a saved theme in local storage
     const savedTheme = localStorage.getItem("theme");
+
     if (savedTheme === "dark") {
       setIsDark(true);
     }
@@ -15,7 +16,9 @@ export const useTheme = () => {
   const toggleTheme = () => {
     setIsDark((prev) => {
       const newTheme = !prev;
+
       localStorage.setItem("theme", newTheme ? "dark" : "light");
+
       return newTheme;
     });
   };

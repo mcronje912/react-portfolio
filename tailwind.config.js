@@ -22,7 +22,7 @@ module.exports = {
         'mountbatten-pink': '#81717a',
       },
       backgroundImage: {
-        'gradient-light': 'linear-gradient(to bottom right, #fcf7ff, #55d6be)',
+        'gradient-light': 'linear-gradient(to bottom right, #fcf7ff, #bcf5ea)',
         'gradient-dark': 'linear-gradient(to bottom right, #1d2f6f, #81717a)',
         'pattern-light': "url('/images/background-pattern2.svg')",
         'pattern-dark': "url('/images/background-pattern.svg')",
