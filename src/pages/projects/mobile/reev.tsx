@@ -22,7 +22,7 @@ export default function ReevProjectPage() {
 
         <section className="flex flex-col items-center justify-center gap-8">
           <h1
-            className="font-silkscreen text-5xl bg-gradient-to-r from-delft-blue to-turquoise bg-clip-text text-transparent dark:from-turquoise dark:to-magnolia"
+            className="font-silkscreen text-center text-5xl bg-gradient-to-r from-delft-blue to-turquoise bg-clip-text text-transparent dark:from-turquoise dark:to-magnolia"
             style={{ fontFamily: "Silkscreen" }}
           >
             Reev Electric Scooter

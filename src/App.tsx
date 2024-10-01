@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import EtamaxProjectPage from "./pages/projects/mobile/etamax";
 import ReevProjectPage from "./pages/projects/mobile/reev";
 
 import IndexPage from "@/pages/index";
@@ -17,6 +18,7 @@ function App() {
       <Route element={<BlogPage />} path="/blog" />
       <Route element={<AboutPage />} path="/about" />
       <Route element={<ReevProjectPage />} path="/projects/mobile/reev" />
+      <Route element={<EtamaxProjectPage />} path="/projects/mobile/etamax" />
     </Routes>
   );
 }

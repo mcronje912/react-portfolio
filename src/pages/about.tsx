@@ -144,10 +144,10 @@ export default function AboutPage() {
             <p className="text-lg">
               I&apos;m Marco Cronje, a Director of Mobile App Development and
               IoT Integration based in Johannesburg, South Africa. With over 14
-              years of experience in graphics, branding and electronics manufacturing, I&apos;ve
-              successfully transitioned into leading cross-platform mobile
-              development projects, showcasing my adaptability and passion for
-              software-hardware communication.
+              years of experience in graphics, branding and electronics
+              manufacturing, I&apos;ve successfully transitioned into leading
+              cross-platform mobile development projects, showcasing my
+              adaptability and passion for software-hardware communication.
             </p>
           </CardBody>
         </Card>

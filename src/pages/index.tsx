@@ -1,9 +1,5 @@
-// index.tsx
-
 import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
+import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,57 +8,28 @@ import {
   faCss3Alt,
   faJs,
   faFlutter,
-  faAndroid, // Import Android icon
+  faAndroid,
   faApple,
 } from "@fortawesome/free-brands-svg-icons";
-import Carousel from "react-multi-carousel";
 
-import "react-multi-carousel/lib/styles.css";
 import DefaultLayout from "@/layouts/default";
 import { GithubIcon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
+import GitHubActivity from "@/components/githubactivity";
 
-const IconCarousel = () => {
-  const icons = [
-    { name: "React", icon: faReact },
-    { name: "HTML5", icon: faHtml5 },
-    { name: "CSS3", icon: faCss3Alt },
-    { name: "JavaScript", icon: faJs },
-    { name: "Flutter", icon: faFlutter },
-    { name: "Android", icon: faAndroid },
-    { name: "iOS", icon: faApple },
-  ];
-
-  const responsive = {
-    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 4 },
-    tablet: { breakpoint: { max: 1024, min: 464 }, items: 3 },
-    mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
-  };
-
-  return (
-    <Carousel
-      arrows={false}
-      autoPlay={true}
-      autoPlaySpeed={4000}
-      containerClass="carousel-container"
-      infinite={true}
-      itemClass="carousel-item"
-      keyBoardControl={false}
-      removeArrowOnDeviceType={["tablet", "mobile"]}
-      responsive={responsive}
-    >
-      {icons.map((icon, index) => (
-        <div key={index} className="flex flex-col items-center">
-          {/* Changed to rounded rectangle */}
-          <div className="rounded-lg p-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20">
-            <FontAwesomeIcon icon={icon.icon} size="3x" />
-          </div>
-          <p className="mt-2 text-cyan-500">{icon.name}</p>
-        </div>
-      ))}
-    </Carousel>
-  );
-};
+const TechIcons = () => (
+  <div className="flex justify-center space-x-4 mt-8">
+    {[faReact, faHtml5, faCss3Alt, faJs, faFlutter, faAndroid, faApple].map(
+      (icon, index) => (
+        <FontAwesomeIcon
+          key={index}
+          className="text-gray-500 dark:text-gray-400 text-2xl"
+          icon={icon}
+        />
+      ),
+    )}
+  </div>
+);
 
 export default function IndexPage() {
   return (
@@ -83,40 +50,33 @@ export default function IndexPage() {
             projects.
           </p>
           <div className="flex gap-8 mt-6 justify-center">
-            <Link
-              className={buttonStyles({ variant: "shadow" })}
-              href="/projects"
-            >
+            <Button as={Link} color="primary" href="/projects" variant="shadow">
               View My Work
-            </Link>
-            <Link
-              className={buttonStyles({ variant: "bordered" })}
+            </Button>
+            <Button
+              as={Link}
+              color="primary"
               href="#contact"
+              variant="bordered"
             >
               Get in Touch
-            </Link>
+            </Button>
           </div>
         </div>
 
-        {/* Cards Section */}
+        <TechIcons />
+
         <div className="mt-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-red/10">
+          <Card className="col-span-1 md:col-span-2 lg:col-span-3 bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
             <CardHeader>
-              <h3 className="font-bold text-large">React Web Applications</h3>
+              <h3 className="font-bold text-large">GitHub Activity</h3>
             </CardHeader>
             <CardBody>
-              <p>
-                Building modern, responsive, and fast web applications with
-                React, Next.js, and Tailwind CSS.
-              </p>
-              <img
-                alt="React Project"
-                src="https://via.placeholder.com/300x200.png?text=React+Project"
-              />
+              <GitHubActivity />
             </CardBody>
           </Card>
 
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-red/10">
+          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
             <CardHeader>
               <h3 className="font-bold text-large">3D Product Design</h3>
             </CardHeader>
@@ -127,12 +87,13 @@ export default function IndexPage() {
               </p>
               <img
                 alt="3D Design Project"
-                src="https://via.placeholder.com/300x200.png?text=3D+Design+Project"
+                className="mt-4 rounded-lg w-full h-48 object-cover"
+                src="/images/placeholder-3d-design.png"
               />
             </CardBody>
           </Card>
 
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-red/10">
+          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
             <CardHeader>
               <h3 className="font-bold text-large">Mobile App Development</h3>
             </CardHeader>
@@ -143,38 +104,50 @@ export default function IndexPage() {
               </p>
               <img
                 alt="Mobile App Project"
-                src="https://via.placeholder.com/300x200.png?text=Mobile+App+Project"
+                className="mt-4 rounded-lg w-full h-48 object-cover"
+                src="/images/placeholder-mobile-app.png"
+              />
+            </CardBody>
+          </Card>
+
+          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
+            <CardHeader>
+              <h3 className="font-bold text-large">Web Development</h3>
+            </CardHeader>
+            <CardBody>
+              <p>
+                Building modern, responsive web applications with React,
+                Next.js, and Tailwind CSS.
+              </p>
+              <img
+                alt="Web Development Project"
+                className="mt-4 rounded-lg w-full h-48 object-cover"
+                src="/images/placeholder-web-dev.png"
               />
             </CardBody>
           </Card>
         </div>
 
-        {/* Icon Carousel Section */}
-        <div className="mt-12 w-full">
-          <IconCarousel />
-        </div>
-
-        {/* Documentation and GitHub Links */}
         <div className="flex gap-8 mt-12">
-          <Link
+          <Button
             isExternal
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
+            as={Link}
+            color="primary"
             href={siteConfig.links.docs}
+            variant="shadow"
           >
             Documentation
-          </Link>
-          <Link
+          </Button>
+          <Button
             isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
+            as={Link}
+            color="primary"
             href={siteConfig.links.github}
+            startContent={<GithubIcon size={20} />}
+            variant="bordered"
           >
-            <GithubIcon size={40} />
             GitHub
-          </Link>
+          </Button>
         </div>
       </section>
     </DefaultLayout>
