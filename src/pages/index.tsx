@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "@nextui-org/link";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
@@ -17,7 +18,7 @@ import { GithubIcon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 import GitHubActivity from "@/components/githubactivity";
 
-const TechIcons = () => (
+const TechIcons: React.FC = () => (
   <div className="flex justify-center space-x-4 mt-8">
     {[faReact, faHtml5, faCss3Alt, faJs, faFlutter, faAndroid, faApple].map(
       (icon, index) => (
@@ -31,7 +32,7 @@ const TechIcons = () => (
   </div>
 );
 
-export default function IndexPage() {
+const IndexPage: React.FC = () => {
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -43,7 +44,7 @@ export default function IndexPage() {
             Bringing Innovation to Life
           </h1>
           <h2 className="text-2xl text-cyan-500 mt-4">
-            Cross-Platform Apps, Web Solutions, and 3D Product Design.
+            Cross-Platform Apps, Web Solutions, and 3D Product Design
           </h2>
           <p className="mt-4 text-lg">
             I develop modern, efficient solutions for mobile, web, and hardware
@@ -66,66 +67,65 @@ export default function IndexPage() {
 
         <TechIcons />
 
-        <div className="mt-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="col-span-1 md:col-span-2 lg:col-span-3 bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
-            <CardHeader>
-              <h3 className="font-bold text-large">GitHub Activity</h3>
-            </CardHeader>
+        <div className="mt-9 w-full max-w-7xl">
+          <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
             <CardBody>
               <GitHubActivity />
             </CardBody>
           </Card>
 
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
-            <CardHeader>
-              <h3 className="font-bold text-large">3D Product Design</h3>
-            </CardHeader>
-            <CardBody>
-              <p>
-                Crafting innovative product designs using Autodesk Fusion 360
-                and prototyping solutions.
-              </p>
-              <img
-                alt="3D Design Project"
-                className="mt-4 rounded-lg w-full h-48 object-cover"
-                src="/images/placeholder-3d-design.png"
-              />
-            </CardBody>
-          </Card>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+              <CardHeader>
+                <h3 className="font-bold text-large">3D Product Design</h3>
+              </CardHeader>
+              <CardBody>
+                <p>
+                  Crafting innovative product designs using Autodesk Fusion 360
+                  and prototyping solutions.
+                </p>
+                <img
+                  alt="3D Design Project"
+                  className="mt-4 rounded-lg w-full h-48 object-cover"
+                  src="/images/placeholder-3d-design.png"
+                />
+              </CardBody>
+            </Card>
 
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
-            <CardHeader>
-              <h3 className="font-bold text-large">Mobile App Development</h3>
-            </CardHeader>
-            <CardBody>
-              <p>
-                Delivering cross-platform mobile apps using Flutter, BLE
-                integration, and IoT solutions.
-              </p>
-              <img
-                alt="Mobile App Project"
-                className="mt-4 rounded-lg w-full h-48 object-cover"
-                src="/images/placeholder-mobile-app.png"
-              />
-            </CardBody>
-          </Card>
+            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+              <CardHeader>
+                <h3 className="font-bold text-large">Mobile App Development</h3>
+              </CardHeader>
+              <CardBody>
+                <p>
+                  Delivering cross-platform mobile apps using Flutter, BLE
+                  integration, and IoT solutions.
+                </p>
+                <img
+                  alt="Mobile App Project"
+                  className="mt-4 rounded-lg w-full h-48 object-cover"
+                  src="/images/placeholder-mobile-app.png"
+                />
+              </CardBody>
+            </Card>
 
-          <Card className="bg-opacity-20 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30">
-            <CardHeader>
-              <h3 className="font-bold text-large">Web Development</h3>
-            </CardHeader>
-            <CardBody>
-              <p>
-                Building modern, responsive web applications with React,
-                Next.js, and Tailwind CSS.
-              </p>
-              <img
-                alt="Web Development Project"
-                className="mt-4 rounded-lg w-full h-48 object-cover"
-                src="/images/placeholder-web-dev.png"
-              />
-            </CardBody>
-          </Card>
+            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+              <CardHeader>
+                <h3 className="font-bold text-large">Web Development</h3>
+              </CardHeader>
+              <CardBody>
+                <p>
+                  Building modern, responsive web applications with React,
+                  Next.js, and Tailwind CSS.
+                </p>
+                <img
+                  alt="Web Development Project"
+                  className="mt-4 rounded-lg w-full h-48 object-cover"
+                  src="/images/placeholder-web-dev.png"
+                />
+              </CardBody>
+            </Card>
+          </div>
         </div>
 
         <div className="flex gap-8 mt-12">
@@ -152,4 +152,6 @@ export default function IndexPage() {
       </section>
     </DefaultLayout>
   );
-}
+};
+
+export default IndexPage;
