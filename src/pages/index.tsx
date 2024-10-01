@@ -32,6 +32,19 @@ const TechIcons: React.FC = () => (
   </div>
 );
 
+// Custom glassmorphism class
+const glassmorphismClass = `
+  bg-opacity-10 
+  backdrop-filter 
+  backdrop-blur-[2px] 
+  bg-white/30 
+  dark:bg-gray-800/30 
+  border 
+  border-gray-200/20 
+  dark:border-gray-700/20 
+  shadow-lg
+`;
+
 const IndexPage: React.FC = () => {
   return (
     <DefaultLayout>
@@ -67,15 +80,9 @@ const IndexPage: React.FC = () => {
 
         <TechIcons />
 
-        <div className="mt-9 w-full max-w-7xl">
-          <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
-            <CardBody>
-              <GitHubActivity />
-            </CardBody>
-          </Card>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+            <Card className={glassmorphismClass}>
               <CardHeader>
                 <h3 className="font-bold text-large">3D Product Design</h3>
               </CardHeader>
@@ -92,7 +99,7 @@ const IndexPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+            <Card className={glassmorphismClass}>
               <CardHeader>
                 <h3 className="font-bold text-large">Mobile App Development</h3>
               </CardHeader>
@@ -109,7 +116,7 @@ const IndexPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            <Card className="bg-opacity-20 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+            <Card className={glassmorphismClass}>
               <CardHeader>
                 <h3 className="font-bold text-large">Web Development</h3>
               </CardHeader>
@@ -126,7 +133,14 @@ const IndexPage: React.FC = () => {
               </CardBody>
             </Card>
           </div>
-        </div>
+       
+        <div className="mt-9 w-full max-w-7xl">
+          <Card className={glassmorphismClass}>
+            <CardBody>
+              <GitHubActivity />
+            </CardBody>
+          </Card>
+          </div>
 
         <div className="flex gap-8 mt-12">
           <Button

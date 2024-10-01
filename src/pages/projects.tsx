@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Chip } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
 
 import DefaultLayout from "@/layouts/default";
 
@@ -78,7 +79,29 @@ const projects: Record<string, Project[]> = {
 };
 
 export default function ProjectsPage() {
+  const categories = Object.keys(projects);
   const [selectedCategory, setSelectedCategory] = useState<string>("design");
+
+  const handleCategoryChange = useCallback((newCategory: string) => {
+    setSelectedCategory(newCategory);
+  }, []);
+
+  const getCurrentCategoryIndex = () => categories.indexOf(selectedCategory);
+
+  const handleSwipe = (direction: "LEFT" | "RIGHT") => {
+    const currentIndex = getCurrentCategoryIndex();
+    if (direction === "LEFT" && currentIndex < categories.length - 1) {
+      handleCategoryChange(categories[currentIndex + 1]);
+    } else if (direction === "RIGHT" && currentIndex > 0) {
+      handleCategoryChange(categories[currentIndex - 1]);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe("LEFT"),
+    onSwipedRight: () => handleSwipe("RIGHT"),
+    trackMouse: true,
+  });
 
   return (
     <DefaultLayout>
@@ -90,15 +113,14 @@ export default function ProjectsPage() {
           Projects
         </h1>
 
-        {/* Category Selection */}
         <Tabs
           aria-label="Project categories"
           color="primary"
           selectedKey={selectedCategory}
           variant="solid"
-          onSelectionChange={(key) => setSelectedCategory(key as string)}
+          onSelectionChange={(key) => handleCategoryChange(key as string)}
         >
-          {Object.keys(projects).map((category) => (
+          {categories.map((category) => (
             <Tab
               key={category}
               title={categoryNames[category as keyof typeof categoryNames]}
@@ -106,57 +128,57 @@ export default function ProjectsPage() {
           ))}
         </Tabs>
 
-        {/* Project Cards */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedCategory}
-            animate={{ opacity: 1, x: 0 }}
-            className="grid grid-cols-1 gap-6 w-full max-w-4xl"
-            exit={{ opacity: 0, x: 20 }}
-            initial={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {projects[selectedCategory].map((project) => (
-              <div
-                key={project.id}
-                className="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg p-6 flex items-start justify-between"
-              >
-                <div className="flex-grow">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
-                    {project.inProgress && (
-                      <Chip color="primary" size="sm" variant="flat">
-                        In Progress
-                      </Chip>
-                    )}
+        <div {...swipeHandlers}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory}
+              animate={{ opacity: 1, x: 0 }}
+              className="grid grid-cols-1 gap-6 w-full max-w-4xl"
+              exit={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {projects[selectedCategory].map((project) => (
+                <div
+                  key={project.id}
+                  className="backdrop-blur-[2px] bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg p-6 flex items-start justify-between shadow-lg backdrop-filter bg-opacity-10"
+                >
+                  <div className="flex-grow">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-xl font-semibold">{project.title}</h3>
+                      {project.inProgress && (
+                        <Chip color="primary" size="sm" variant="flat">
+                          In Progress
+                        </Chip>
+                      )}
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.description}
+                    </p>
+                    <Button
+                      as={Link}
+                      color="primary"
+                      isDisabled={project.inProgress}
+                      size="sm"
+                      to={project.link}
+                      variant="bordered"
+                    >
+                      Learn More
+                    </Button>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
-                  <Button
-                    as={Link}
-                    color="primary"
-                    isDisabled={project.inProgress}
-                    size="sm"
-                    to={project.link}
-                    variant="bordered"
-                  >
-                    Learn More
-                  </Button>
+                  <div className="ml-4 flex-shrink-0">
+                    <img
+                      alt={project.title}
+                      className="w-28 h-28 object-cover rounded-lg shadow-md"
+                      src={project.image}
+                    />
+                  </div>
                 </div>
-                <div className="ml-4 flex-shrink-0">
-                  <img
-                    alt={project.title}
-                    className="w-28 h-28 object-cover rounded-lg shadow-md"
-                    src={project.image}
-                  />
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        {/* Quick Navigation Links */}
         <div className="mt-12 p-6 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg w-full max-w-4xl">
           <h2 className="text-2xl font-semibold mb-4 text-center">
             Quick Navigation

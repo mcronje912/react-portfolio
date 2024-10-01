@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Progress } from "@nextui-org/react";
 
 interface LanguageData {
   name: string;
@@ -152,7 +153,18 @@ const GitHubActivity: React.FC = () => {
     fetchGitHubData();
   }, []);
 
-  if (loading) return <p>Loading GitHub activity...</p>;
+  if (loading)
+    return (
+      <>
+        <p>Loading GitHub activity...</p>
+        <Progress
+          isIndeterminate
+          aria-label="Loading..."
+          className="max-w-md"
+          size="lg"
+        />
+      </>
+    );
   if (error) return <p>{error}</p>;
 
   return (
@@ -166,7 +178,7 @@ const GitHubActivity: React.FC = () => {
             {repos.map((repo) => (
               <li key={repo.id} className="mb-2">
                 <a
-                  className="text-blue-500 hover:underline"
+                  className="text-primary hover:underline"
                   href={repo.html_url}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -174,7 +186,7 @@ const GitHubActivity: React.FC = () => {
                   {repo.name} {repo.private ? "(Private)" : ""}
                 </a>
                 {repo.description && (
-                  <p className="ml-4 text-sm text-gray-600">
+                  <p className="ml-4 text-sm text-mountbatten-pink">
                     {repo.description}
                   </p>
                 )}
@@ -207,7 +219,7 @@ const GitHubActivity: React.FC = () => {
                         fill={COLORS[index % COLORS.length]}
                       />
                     ))}
-                  </Pie>
+                  </Pie>d
                   <Tooltip
                     formatter={(_value, name, props) => [
                       `${props.payload.percentage.toFixed(2)}%`,
