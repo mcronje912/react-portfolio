@@ -1,5 +1,3 @@
-
-import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Chip } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,7 +21,7 @@ const projects: Record<string, Project[]> = {
       title: "Etamax Intelligent Solar Geyser",
       description: "App for managing home water heater energy usage",
       link: "/projects/mobile/etamax",
-      image: "/public/images/projects/etamaxth.png",
+      image: "/images/projects/etamaxth.png", // Removed 'public' from path
       inProgress: false,
     },
     {
@@ -31,18 +29,15 @@ const projects: Record<string, Project[]> = {
       title: "Reev Electric Scooter",
       description: "Accompanying app to the Reev Electric Scooter",
       link: "/projects/mobile/reev",
-      image: "/public/images/projects/reevth.png",
+      image: "/images/projects/reevth.png", // Removed 'public' from path
       inProgress: false,
     },
-  ]
+  ],
 };
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("mobile");
-
-  const handleCategoryChange = useCallback((newCategory: string) => {
-    setSelectedCategory(newCategory);
-  }, []);
+  // Since we only have mobile projects now, we can simplify this
+  const selectedCategory = "mobile";
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => null,
@@ -61,21 +56,18 @@ export default function ProjectsPage() {
         </h1>
 
         <Tabs 
-          aria-label="Project categories"
+          aria-label="Project categories" 
           selectedKey="mobile"
+          disabledKeys={["web", "3d"]}
         >
           <Tab key="mobile" title="Mobile Development" />
-          <Tab 
-            key="web" 
-            title="Web Development" 
-            isDisabled
-            className="opacity-40 cursor-not-allowed"
+          <Tab
+            key="web"
+            title="Web Development"
           />
-          <Tab 
-            key="3d" 
-            title="3D Design" 
-            isDisabled
-            className="opacity-40 cursor-not-allowed"
+          <Tab
+            key="3d"
+            title="3D Design"
           />
         </Tabs>
 

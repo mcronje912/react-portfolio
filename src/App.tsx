@@ -1,24 +1,23 @@
 import { Route, Routes } from "react-router-dom";
 
-import EtamaxProjectPage from "./pages/projects/mobile/etamax";
-import ReevProjectPage from "./pages/projects/mobile/reev";
-import ContactPage from "./pages/contact";
-
 import IndexPage from "@/pages/index";
-import ProjectsPage from "@/pages/projects";
 import PricingPage from "@/pages/pricing";
 import AboutPage from "@/pages/about";
+import ProjectsPage from "@/pages/projects";
+import ReevProjectPage from "@/pages/projects/mobile/reev";
+import EtamaxProjectPage from "@/pages/projects/mobile/etamax";
+import ContactPage from "@/pages/contact";
 
 function App() {
   return (
     <Routes>
       <Route element={<IndexPage />} path="/" />
-      <Route element={<ProjectsPage />} path="/projects" />
       <Route element={<PricingPage />} path="/pricing" />
-      <Route element={<ContactPage />} path="/contact" />
       <Route element={<AboutPage />} path="/about" />
+      <Route element={<ProjectsPage />} path="/projects" />
       <Route element={<ReevProjectPage />} path="/projects/mobile/reev" />
       <Route element={<EtamaxProjectPage />} path="/projects/mobile/etamax" />
+      <Route element={<ContactPage />} path="/contact" />
     </Routes>
   );
 }

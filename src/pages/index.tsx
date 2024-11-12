@@ -14,8 +14,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import DefaultLayout from "@/layouts/default";
-import { GithubIcon } from "@/components/icons";
-import { siteConfig } from "@/config/site";
 import GitHubActivity from "@/components/githubactivity";
 
 const TechIcons: React.FC = () => (

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs";
 import { Link } from "react-router-dom";
