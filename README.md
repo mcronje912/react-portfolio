@@ -1,1 +1,1 @@
-# Temporary gh-pages branch
+# GitHub Pages Branch
