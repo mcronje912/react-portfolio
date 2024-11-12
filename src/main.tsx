@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-portfolio"> {/* Updated with your exact repo name */}
       <Provider>
         <App />
       </Provider>
