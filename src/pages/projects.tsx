@@ -20,7 +20,7 @@ const projects: Record<string, Project[]> = {
   mobile: [
     {
       id: 1,
-      title: "etamax Intelligent Solar Geyser",
+      title: "Etamax Intelligent Solar Geyser",
       description: "App for managing home water heater energy usage",
       link: "/projects/mobile/etamax",
       image: "/public/images/projects/etamaxth.png",
