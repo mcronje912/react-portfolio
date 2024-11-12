@@ -10,7 +10,8 @@
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b deploy2 -d dist"
+    "deploy": "gh-pages -d dist -f"
+
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
