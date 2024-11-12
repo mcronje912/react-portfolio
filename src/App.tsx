@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
 import IndexPage from "@/pages/index";
-import PricingPage from "@/pages/pricing";
 import AboutPage from "@/pages/about";
 import ProjectsPage from "@/pages/projects";
 import ReevProjectPage from "@/pages/projects/mobile/reev";
@@ -12,7 +11,6 @@ function App() {
   return (
     <Routes>
       <Route element={<IndexPage />} path="/" />
-      <Route element={<PricingPage />} path="/pricing" />
       <Route element={<AboutPage />} path="/about" />
       <Route element={<ProjectsPage />} path="/projects" />
       <Route element={<ReevProjectPage />} path="/projects/mobile/reev" />
