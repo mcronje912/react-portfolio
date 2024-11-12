@@ -5,6 +5,7 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Smartphone, Database, Bluetooth } from "lucide-react";
 
 import DefaultLayout from "@/layouts/default";
 
@@ -25,17 +26,17 @@ interface CarouselProps {
 export default function EtamaxProjectPage() {
   const userInterfaceScreenshots: Screenshot[] = [
     {
-      src: "/images/projects/etamax/main-dashboard.png",
+      src: "/images/projects/etamax/main-dashboard.jpg",
       alt: "Main Dashboard",
       caption: "Intuitive dashboard with real-time monitoring and controls"
     },
     {
-      src: "/images/projects/etamax/scheduling.png",
+      src: "/images/projects/etamax/connect.jpg",
       alt: "Scheduling Interface",
       caption: "Smart scheduling with drag-and-drop functionality"
     },
     {
-      src: "/images/projects/etamax/gauges.png",
+      src: "/images/projects/etamax/schedule.jpg",
       alt: "Dynamic Gauges",
       caption: "Live temperature and energy consumption monitoring"
     },
@@ -317,28 +318,65 @@ export default function EtamaxProjectPage() {
             </CardBody>
           </Card>
 
-          {/* Technology Stack */}
-          <Card className="max-w-4xl backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
-            <CardHeader>
-              <h2 className="text-2xl font-bold">Technology Stack</h2>
-            </CardHeader>
-            <CardBody>
-              <p className="text-lg">
-                This project leverages a modern tech stack to ensure high
-                performance, cross-platform compatibility, and seamless IoT
-                integration:
-              </p>
-              <ul className="list-disc list-inside space-y-2 mt-2">
-                <li>Flutter and Dart for cross-platform mobile development</li>
-                <li>Firebase for real-time database and cloud functions</li>
-                <li>Google Cloud Platform for backend services</li>
-                <li>BigQuery for data analytics and reporting</li>
-                <li>Looker Studio for data visualization</li>
-                <li>SendGrid API for instant email alerts</li>
-                <li>Bluetooth Low Energy (BLE) for device communication</li>
-              </ul>
-            </CardBody>
-          </Card>
+       {/* Technology Stack */}
+<Card className="max-w-4xl backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">
+  <CardHeader>
+    <h2 className="text-2xl font-bold">Technology Stack</h2>
+  </CardHeader>
+  <CardBody>
+    <div className="flex flex-col gap-6">
+      <p className="text-lg">
+        This project leverages a modern tech stack to ensure high
+        performance, cross-platform compatibility, and seamless IoT
+        integration:
+      </p>
+      
+      {/* Core Technologies with Icons */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+          <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+            <Smartphone size={40} />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">Flutter & Dart</h3>
+          <p className="text-center text-sm text-default-600">
+            Cross-platform mobile development framework
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+          <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+            <Database size={40} />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">Firebase</h3>
+          <p className="text-center text-sm text-default-600">
+            Real-time database and cloud functions
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+          <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+            <Bluetooth size={40} />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">BLE</h3>
+          <p className="text-center text-sm text-default-600">
+            Bluetooth Low Energy communication
+          </p>
+        </div>
+      </div>
+
+      {/* Additional Technologies */}
+      <div className="mt-4">
+        <h3 className="text-lg font-semibold mb-3">Additional Technologies</h3>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Google Cloud Platform for backend services</li>
+          <li>BigQuery for data analytics and reporting</li>
+          <li>Looker Studio for data visualization</li>
+          <li>SendGrid API for instant email alerts</li>
+        </ul>
+      </div>
+    </div>
+  </CardBody>
+</Card>
 
           {/* Project Achievements */}
           <Card className="max-w-4xl backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700">

@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Chip } from "@nextui-org/react";
@@ -15,49 +16,7 @@ interface Project {
   inProgress: boolean;
 }
 
-const categoryNames = {
-  web: "Web Development",
-  design: "3D Design",
-  mobile: "Mobile Apps",
-};
-
 const projects: Record<string, Project[]> = {
-  web: [
-    {
-      id: 1,
-      title: "Joint Ventures Electronic Services",
-      description: "Complete revamp of the company website",
-      link: "/projects/web/jves",
-      image: "/placeholder.jpg",
-      inProgress: true,
-    },
-    {
-      id: 2,
-      title: "Portfolio Website",
-      description: "A responsive portfolio website built with React",
-      link: "/projects/web/portfolio",
-      image: "/placeholder.jpg",
-      inProgress: true,
-    },
-  ],
-  design: [
-    {
-      id: 1,
-      title: "Mine Lamp Charging Rack",
-      description: "3D Prototype of a Mine Cap Lamp charging rack",
-      link: "/projects/design/mine-lamp",
-      image: "/public/images/projects/smlamp.jpg",
-      inProgress: false,
-    },
-    {
-      id: 2,
-      title: "Sheet",
-      description: "Innovative mouse design for improved comfort",
-      link: "/projects/design/sheet",
-      image: "/placeholder.jpg",
-      inProgress: true,
-    },
-  ],
   mobile: [
     {
       id: 1,
@@ -75,31 +34,19 @@ const projects: Record<string, Project[]> = {
       image: "/public/images/projects/reevth.png",
       inProgress: false,
     },
-  ],
+  ]
 };
 
 export default function ProjectsPage() {
-  const categories = Object.keys(projects);
-  const [selectedCategory, setSelectedCategory] = useState<string>("design");
+  const [selectedCategory, setSelectedCategory] = useState<string>("mobile");
 
   const handleCategoryChange = useCallback((newCategory: string) => {
     setSelectedCategory(newCategory);
   }, []);
 
-  const getCurrentCategoryIndex = () => categories.indexOf(selectedCategory);
-
-  const handleSwipe = (direction: "LEFT" | "RIGHT") => {
-    const currentIndex = getCurrentCategoryIndex();
-    if (direction === "LEFT" && currentIndex < categories.length - 1) {
-      handleCategoryChange(categories[currentIndex + 1]);
-    } else if (direction === "RIGHT" && currentIndex > 0) {
-      handleCategoryChange(categories[currentIndex - 1]);
-    }
-  };
-
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => handleSwipe("LEFT"),
-    onSwipedRight: () => handleSwipe("RIGHT"),
+    onSwipedLeft: () => null,
+    onSwipedRight: () => null,
     trackMouse: true,
   });
 
@@ -113,19 +60,23 @@ export default function ProjectsPage() {
           Projects
         </h1>
 
-        <Tabs
+        <Tabs 
           aria-label="Project categories"
-          color="primary"
-          selectedKey={selectedCategory}
-          variant="solid"
-          onSelectionChange={(key) => handleCategoryChange(key as string)}
+          selectedKey="mobile"
         >
-          {categories.map((category) => (
-            <Tab
-              key={category}
-              title={categoryNames[category as keyof typeof categoryNames]}
-            />
-          ))}
+          <Tab key="mobile" title="Mobile Development" />
+          <Tab 
+            key="web" 
+            title="Web Development" 
+            isDisabled
+            className="opacity-40 cursor-not-allowed"
+          />
+          <Tab 
+            key="3d" 
+            title="3D Design" 
+            isDisabled
+            className="opacity-40 cursor-not-allowed"
+          />
         </Tabs>
 
         <div {...swipeHandlers}>
@@ -177,28 +128,6 @@ export default function ProjectsPage() {
               ))}
             </motion.div>
           </AnimatePresence>
-        </div>
-
-        <div className="mt-12 p-6 backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-lg w-full max-w-4xl">
-          <h2 className="text-2xl font-semibold mb-4 text-center">
-            Quick Navigation
-          </h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button as={Link} color="primary" to="/about" variant="flat">
-              About Page
-            </Button>
-            <Button
-              as={Link}
-              color="primary"
-              to="/projects/mobile/reev"
-              variant="flat"
-            >
-              Reev Project
-            </Button>
-            <Button as={Link} color="primary" to="/blog" variant="flat">
-              Blog Page
-            </Button>
-          </div>
         </div>
       </div>
     </DefaultLayout>

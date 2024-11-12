@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs";
 import { Link } from "react-router-dom";
+import { Image } from "@nextui-org/image";
+import { Smartphone, Database, Bluetooth } from "lucide-react";
 
 import DefaultLayout from "@/layouts/default";
 
@@ -52,15 +54,32 @@ export default function ReevProjectPage() {
               <h2 className="text-2xl font-bold">Key Features</h2>
             </CardHeader>
             <CardBody>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Real-time scooter status monitoring</li>
-                <li>Battery level and range estimation</li>
-                <li>GPS tracking and route planning</li>
-                <li>Secure user sign up/log in</li>
-                <li>Remote locking and unlocking</li>
-                <li>Maintenance schedules and notifications</li>
-                <li>Ride history and statistics</li>
-              </ul>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Features List */}
+                <div>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>Real-time scooter status monitoring</li>
+                    <li>Battery level and range estimation</li>
+                    <li>GPS tracking and route planning</li>
+                    <li>Secure user sign up/log in</li>
+                    <li>Remote locking and unlocking</li>
+                    <li>Maintenance schedules and notifications</li>
+                    <li>Ride history and statistics</li>
+                  </ul>
+                </div>
+
+                {/* Screenshot */}
+                <div className="flex justify-center items-center">
+                  <div className="relative w-[280px] h-[560px] overflow-hidden rounded-lg bg-default-100">
+                    <Image
+                      src="/images/projects/reev/reevhome.png"
+                      alt="Reev App Home Screen"
+                      className="h-full w-full object-contain p-2"
+                      removeWrapper
+                    />
+                  </div>
+                </div>
+              </div>
             </CardBody>
           </Card>
 
@@ -70,17 +89,59 @@ export default function ReevProjectPage() {
               <h2 className="text-2xl font-bold">Technology Stack</h2>
             </CardHeader>
             <CardBody>
-              <p className="text-lg">
-                This project is built using cutting-edge technologies to ensure
-                high performance and cross-platform compatibility:
-              </p>
-              <ul className="list-disc list-inside space-y-2 mt-2">
-                <li>Flutter for cross-platform mobile development</li>
-                <li>Dart programming language</li>
-                <li>Firebase for backend services and real-time database</li>
-                <li>Google Maps API for location services</li>
-                <li>Bluetooth Low Energy (BLE) for scooter communication</li>
-              </ul>
+              <div className="flex flex-col gap-6">
+                <p className="text-lg">
+                  This project is built using cutting-edge technologies to
+                  ensure high performance and cross-platform compatibility:
+                </p>
+
+                {/* Core Technologies with Icons */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+                    <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+                      <Smartphone size={40} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">
+                      Flutter & Dart
+                    </h3>
+                    <p className="text-center text-sm text-default-600">
+                      Cross-platform mobile development framework
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+                    <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+                      <Database size={40} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Firebase</h3>
+                    <p className="text-center text-sm text-default-600">
+                      Backend services and real-time database
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col items-center p-4 rounded-lg bg-default-100 dark:bg-default-50">
+                    <div className="w-16 h-16 flex items-center justify-center text-primary mb-3">
+                      <Bluetooth size={40} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">BLE</h3>
+                    <p className="text-center text-sm text-default-600">
+                      Bluetooth Low Energy communication
+                    </p>
+                  </div>
+                </div>
+
+                {/* Additional Technologies */}
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold mb-3">
+                    Additional Technologies
+                  </h3>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>Google Maps API for location services</li>
+                    <li>Secure authentication and user management</li>
+                    <li>Real-time GPS tracking integration</li>
+                  </ul>
+                </div>
+              </div>
             </CardBody>
           </Card>
         </section>

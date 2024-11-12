@@ -142,27 +142,7 @@ const IndexPage: React.FC = () => {
           </Card>
           </div>
 
-        <div className="flex gap-8 mt-12">
-          <Button
-            isExternal
-            as={Link}
-            color="primary"
-            href={siteConfig.links.docs}
-            variant="shadow"
-          >
-            Documentation
-          </Button>
-          <Button
-            isExternal
-            as={Link}
-            color="primary"
-            href={siteConfig.links.github}
-            startContent={<GithubIcon size={20} />}
-            variant="bordered"
-          >
-            GitHub
-          </Button>
-        </div>
+      
       </section>
     </DefaultLayout>
   );

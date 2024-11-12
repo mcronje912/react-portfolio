@@ -59,28 +59,6 @@ const Navbar = () => {
             </Link>
           </NavbarItem>
         ))}
-
-        {/* Dropdown Example */}
-        <NavbarItem>
-          <Dropdown>
-            <DropdownTrigger>
-              <button className="text-foreground hover:text-primary/5">
-                More
-              </button>
-            </DropdownTrigger>
-            <DropdownMenu>
-              <DropdownItem key="testimonials">
-                <Link to="/testimonials">Testimonials</Link>
-              </DropdownItem>
-              <DropdownItem key="contact">
-                <Link to="/contact">Contact</Link>
-              </DropdownItem>
-              <DropdownItem key="about">
-                <Link to="/about">About</Link>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
       </NavbarContent>
 
       {/* Icons and Theme Switch */}
@@ -88,7 +66,7 @@ const Navbar = () => {
         <NavbarItem>
           <Tooltip content="LinkedIn">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/marco-cronje-32692b124/"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -103,7 +81,7 @@ const Navbar = () => {
         <NavbarItem>
           <Tooltip content="GitHub">
             <a
-              href="https://github.com"
+              href="https://github.com/mcronje912"
               rel="noopener noreferrer"
               target="_blank"
             >
