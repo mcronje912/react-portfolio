@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-silkscreen: 'Silkscreen', cursive;
+  --font-ubuntu: 'Ubuntu', sans-serif;
+}
+
+body {
+  font-family: var(--font-ubuntu);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-silkscreen);
+}

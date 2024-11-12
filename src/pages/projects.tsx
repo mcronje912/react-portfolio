@@ -1,9 +1,10 @@
+import { useState } from "react";  // Removed unused React and useCallback
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Chip } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
-
 import DefaultLayout from "@/layouts/default";
+import PlaceholderImage from "@/components/PlaceholderImage";
 
 interface Project {
   id: number;
@@ -18,10 +19,10 @@ const projects: Record<string, Project[]> = {
   mobile: [
     {
       id: 1,
-      title: "Etamax Intelligent Solar Geyser",
+      title: "etamax Intelligent Solar Geyser",
       description: "App for managing home water heater energy usage",
       link: "/projects/mobile/etamax",
-      image: "/images/projects/etamaxth.png", // Removed 'public' from path
+      image: "/react-portfolio/images/projects/etamaxth.png",
       inProgress: false,
     },
     {
@@ -29,21 +30,44 @@ const projects: Record<string, Project[]> = {
       title: "Reev Electric Scooter",
       description: "Accompanying app to the Reev Electric Scooter",
       link: "/projects/mobile/reev",
-      image: "/images/projects/reevth.png", // Removed 'public' from path
+      image: "/react-portfolio/images/projects/reevth.png",
       inProgress: false,
     },
-  ],
+  ]
 };
 
 export default function ProjectsPage() {
-  // Since we only have mobile projects now, we can simplify this
-  const selectedCategory = "mobile";
+  const [selectedCategory] = useState<string>("mobile");  // Removed unused setter
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => null,
     onSwipedRight: () => null,
     trackMouse: true,
   });
+
+  const renderImage = (src: string, title: string) => {
+    if (src.startsWith("/react-portfolio")) {
+      return (
+        <img
+          src={src}
+          alt={title}
+          className="w-28 h-28 object-cover rounded-lg shadow-md"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/react-portfolio/placeholder.jpg";
+          }}
+        />
+      );
+    }
+    return (
+      <PlaceholderImage
+        width={112}
+        height={112}
+        text={title}
+        className="rounded-lg shadow-md"
+      />
+    );
+  };
 
   return (
     <DefaultLayout>
@@ -56,18 +80,23 @@ export default function ProjectsPage() {
         </h1>
 
         <Tabs 
-          aria-label="Project categories" 
+          aria-label="Project categories"
           selectedKey="mobile"
-          disabledKeys={["web", "3d"]}
+          color="primary"
+          variant="solid"
         >
           <Tab key="mobile" title="Mobile Development" />
-          <Tab
-            key="web"
-            title="Web Development"
+          <Tab 
+            key="web" 
+            title="Web Development" 
+            isDisabled
+            className="opacity-40 cursor-not-allowed"
           />
-          <Tab
-            key="3d"
-            title="3D Design"
+          <Tab 
+            key="3d" 
+            title="3D Design" 
+            isDisabled
+            className="opacity-40 cursor-not-allowed"
           />
         </Tabs>
 
@@ -100,21 +129,17 @@ export default function ProjectsPage() {
                     </p>
                     <Button
                       as={Link}
-                      color="primary"
-                      isDisabled={project.inProgress}
-                      size="sm"
                       to={project.link}
+                      color="primary"
                       variant="bordered"
+                      size="sm"
+                      isDisabled={project.inProgress}
                     >
                       Learn More
                     </Button>
                   </div>
                   <div className="ml-4 flex-shrink-0">
-                    <img
-                      alt={project.title}
-                      className="w-28 h-28 object-cover rounded-lg shadow-md"
-                      src={project.image}
-                    />
+                    {renderImage(project.image, project.title)}
                   </div>
                 </div>
               ))}

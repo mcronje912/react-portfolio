@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Input, Textarea, Button } from "@nextui-org/react";
 import emailjs from "@emailjs/browser";
-
 import DefaultLayout from "@/layouts/default";
 
 export default function ContactPage() {
@@ -11,6 +10,7 @@ export default function ContactPage() {
     reply_to: "",
     message: "",
   });
+
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,10 +20,10 @@ export default function ContactPage() {
 
     try {
       const result = await emailjs.send(
-        "service_cgcy3xv", // Get this from EmailJS
-        "template_9egp519", // Get this from EmailJS
+        "service_cgcy3xv",
+        "template_9egp519",
         formData,
-        "b3S5dSqsBJsINPdib", // Get this from EmailJS
+        "b3S5dSqsBJsINPdib"
       );
 
       if (result.text === "OK") {
@@ -39,10 +39,9 @@ export default function ContactPage() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -58,7 +57,6 @@ export default function ContactPage() {
         >
           Get in touch
         </h1>
-
         <Card className="max-w-lg w-full backdrop-blur-md bg-white/30 dark:bg-gray-800/30">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col">

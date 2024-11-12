@@ -1,23 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";  // Only these imports needed
 import IndexPage from "@/pages/index";
-import AboutPage from "@/pages/about";
 import ProjectsPage from "@/pages/projects";
-import ReevProjectPage from "@/pages/projects/mobile/reev";
-import EtamaxProjectPage from "@/pages/projects/mobile/etamax";
 import ContactPage from "@/pages/contact";
+import AboutPage from "@/pages/about";
 
-function App() {
+const App = () => {
   return (
     <Routes>
-      <Route element={<IndexPage />} path="/" />
-      <Route element={<AboutPage />} path="/about" />
-      <Route element={<ProjectsPage />} path="/projects" />
-      <Route element={<ReevProjectPage />} path="/projects/mobile/reev" />
-      <Route element={<EtamaxProjectPage />} path="/projects/mobile/etamax" />
-      <Route element={<ContactPage />} path="/contact" />
+      <Route path="/" element={<IndexPage />} />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/about" element={<AboutPage />} />
     </Routes>
   );
-}
+};
 
 export default App;
